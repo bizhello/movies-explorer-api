@@ -59,7 +59,7 @@ const movieSchema = new Schema({
   },
 })
 
-module.exports.User = model('movie', movieSchema);
+module.exports.Movie = model('movie', movieSchema);
 
 //   country — страна создания фильма. Обязательное поле-строка.
 //   director — режиссёр фильма. Обязательное поле-строка.
