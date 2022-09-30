@@ -13,8 +13,8 @@ const { requestLogger, errorLogger } = require('./src/middlewares/logger');
 const allowedCors = [
   'https://bizhello.nomoredomains.sbs',
   'http://bizhello.nomoredomains.sbs',
-  'https://b1jevi4.nomoredomains.sbs',
-  'http://b1jevi4.nomoredomains.sbs'
+  'https://praktikum.tk',
+  'http://praktikum.tk'
 ];
 dotenv.config();
 
