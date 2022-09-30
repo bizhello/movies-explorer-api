@@ -5,10 +5,17 @@ const dotenv = require('dotenv');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
+const cors = require('cors');
 
 const { routes } = require('./src/routes/index');
 const { errorHandler } = require('./utils/errors/errorHandler');
-
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+const allowedCors = [
+  'https://bizhello.nomoredomains.sbs',
+  'http://bizhello.nomoredomains.sbs',
+  'https://b1jevi4.nomoredomains.sbs',
+  'http://b1jevi4.nomoredomains.sbs'
+];
 dotenv.config();
 
 const limiter = rateLimit({
@@ -23,12 +30,25 @@ const app = express();
 app.disable('x-powered-by');
 
 const { PORT = 3000 } = process.env;
+const corsOptions = {
+  credentials: true,
+  origin(origin, callback) {
+    if (allowedCors.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 
+app.use(cors(corsOptions));
 app.use(express.json());
+app.use(requestLogger);
 app.use(limiter);
 app.use(helmet());
 app.use(cookieParser());
 app.use(routes);
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 

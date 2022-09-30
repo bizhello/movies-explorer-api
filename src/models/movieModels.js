@@ -44,11 +44,6 @@ const movieSchema = new Schema({
     ref: 'user',
     require: true,
   },
-  movieId: {
-    type: ObjectId,
-    // ref: 'MoviesExplorer',
-    require: true,
-  },
   nameRU: {
     type: String,
     require: true,
