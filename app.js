@@ -9,7 +9,7 @@ const cors = require('cors');
 
 const { routes } = require('./src/routes/index');
 const { errorHandler } = require('./utils/errors/errorHandler');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('./src/middlewares/logger');
 const allowedCors = [
   'https://bizhello.nomoredomains.sbs',
   'http://bizhello.nomoredomains.sbs',
