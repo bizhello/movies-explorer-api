@@ -21,6 +21,6 @@ const userSchema = new Schema({
     minlength: [2, 'Минимальная длина 2 символа'],
     maxlength: [30, 'Максимальная длина 30 символов'],
   },
-})
+});
 
 module.exports.User = model('user', userSchema);

@@ -16,7 +16,7 @@ async function login(req, res, next) {
     if (!user) {
       throw new UnauthorizedError('Неправильно указан логин и/или пароль!');
     }
-    const match = bcrypt.compare(password, user.password);
+    const match = await bcrypt.compare(password, user.password);
     if (!match) {
       throw new UnauthorizedError('Неправильно указан логин и/или пароль!');
     }

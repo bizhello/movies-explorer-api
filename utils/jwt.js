@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = 'very-secrets';
+const {
+  JWT_SECRET = 'very-secrets',
+} = process.env;
 
 const getJwtToken = (id) => jwt.sign(
   { id },

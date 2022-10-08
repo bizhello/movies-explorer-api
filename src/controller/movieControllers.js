@@ -14,7 +14,20 @@ async function getMovies(req, res, next) {
 
 async function postMovies(req, res, next) {
   try {
-    const movie = new Movie(req.body);
+    const movie = new Movie({
+      country: req.body.country,
+      director: req.body.director,
+      duration: req.body.duration,
+      year: req.body.year,
+      description: req.body.description,
+      image: req.body.image,
+      trailerLink: req.body.trailerLink,
+      thumbnail: req.body.thumbnail,
+      owner: req.body.owner,
+      movieId: req.body.movieId,
+      nameRU: req.body.nameRU,
+      nameEN: req.body.nameEN,
+    });
     movie.owner = req.user._id;
     await movie.save();
     res.send(movie);

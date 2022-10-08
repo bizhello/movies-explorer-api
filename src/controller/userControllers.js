@@ -17,10 +17,14 @@ async function aboutMe(req, res, next) {
 
 async function patchUser(req, res, next) {
   try {
-    const user = await User.findOneAndUpdate({ _id: req.user._id }, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const user = await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { email: req.body.email, name: req.body.name },
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
     res.send(user);
   } catch (error) {
     if (error.name === 'ValidationError') {
