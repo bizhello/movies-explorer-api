@@ -5,7 +5,8 @@ const dotenv = require('dotenv');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
-// const cors = require('cors');
+const cors = require('cors');
+
 dotenv.config();
 const { routes } = require('./src/routes/index');
 const { errorHandler } = require('./utils/errors/errorHandler');
@@ -33,7 +34,7 @@ app.disable('x-powered-by');
 
 const {
   dataMovies = 'mongodb://localhost:27017/bitfilmsdb',
-  PORT = 3001,
+  PORT = 3000,
 } = process.env;
 
 // const corsOptions = {
@@ -46,7 +47,8 @@ const {
 //     }
 //   },
 // };
-
+app.options('*', cors());
+app.use(cors());
 // app.use(cors(corsOptions));
 app.use(express.json());
 app.use(requestLogger);
