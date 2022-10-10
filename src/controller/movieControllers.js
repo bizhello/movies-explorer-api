@@ -23,7 +23,6 @@ async function postMovies(req, res, next) {
       image: req.body.image,
       trailerLink: req.body.trailerLink,
       thumbnail: req.body.thumbnail,
-      owner: req.body.owner,
       movieId: req.body.movieId,
       nameRU: req.body.nameRU,
       nameEN: req.body.nameEN,

@@ -1,6 +1,7 @@
 const { User } = require('../models/userModels');
 const { NotFoundError } = require('../../utils/errors/NotFoundError');
 const { BadRequestError } = require('../../utils/errors/BadRequestError');
+const { ConflictError } = require('../../utils/errors/ConflictError');
 
 async function aboutMe(req, res, next) {
   try {
@@ -29,6 +30,8 @@ async function patchUser(req, res, next) {
   } catch (error) {
     if (error.name === 'ValidationError') {
       next(new BadRequestError('Введены некорректные данные'));
+    } else if (error.name === 'MongoServerError') {
+      next(new ConflictError('Такая почта уже занята'));
     } else {
       next(error);
     }

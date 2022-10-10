@@ -11,6 +11,7 @@ dotenv.config();
 const { routes } = require('./src/routes/index');
 const { errorHandler } = require('./utils/errors/errorHandler');
 const { requestLogger, errorLogger } = require('./src/middlewares/logger');
+const { dataRateLimit } = require('./utils/limiter');
 
 // const allowedCors = [
 //   'https://bizhello.nomoredomains.sbs',
@@ -21,21 +22,17 @@ const { requestLogger, errorLogger } = require('./src/middlewares/logger');
 //   'https://localhost:3000',
 // ];
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  standardHeaders: true,
-  legacyHeaders: false,
-});
+const limiter = rateLimit(dataRateLimit);
 
 const app = express();
 
 app.disable('x-powered-by');
 
 const {
-  dataMovies = 'mongodb://localhost:27017/bitfilmsdb',
+  dataMovies = 'mongodb://localhost:27017/moviesdb',
   PORT = 3000,
-} = process.env;
+} = process.env; // В production-режиме
+//  адрес базы данных берётся из process.env.
 
 // const corsOptions = {
 //   credentials: true,
