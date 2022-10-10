@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { isURL } = require('validator');
+
 const { Schema, model } = mongoose;
 const { ObjectId } = Schema.Types;
 
@@ -44,6 +45,10 @@ const movieSchema = new Schema({
     ref: 'user',
     require: true,
   },
+  movieId: {
+    type: Number,
+    require: true,
+  },
   nameRU: {
     type: String,
     require: true,
@@ -52,7 +57,7 @@ const movieSchema = new Schema({
     type: String,
     require: true,
   },
-})
+});
 
 module.exports.Movie = model('movie', movieSchema);
 
@@ -63,7 +68,8 @@ module.exports.Movie = model('movie', movieSchema);
 //   description — описание фильма. Обязательное поле-строка.
 //   image — ссылка на постер к фильму. Обязательное поле-строка. Запишите её URL-адресом.
 //   trailerLink — ссылка на трейлер фильма. Обязательное поле-строка. Запишите её URL-адресом.
-//   thumbnail — миниатюрное изображение постера к фильму. Обязательное поле-строка. Запишите её URL-адресом.
+//   thumbnail — миниатюрное изображение постера к фильму. Обязательное поле-строка.
+//  Запишите её URL-адресом
 //   owner — _id пользователя, который сохранил фильм. Обязательное поле.
 //   movieId — id фильма, который содержится в ответе сервиса MoviesExplorer. Обязательное поле.
 //   nameRU — название фильма на русском языке. Обязательное поле-строка.

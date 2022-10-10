@@ -31,8 +31,13 @@
     "jsonwebtoken": "^8.5.1",
     "logger": "^0.0.1",
     "mongoose": "^6.6.1",
-    "nodemon": "^2.0.20",
     "validator": "^13.7.0",
     "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.21.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.20"
   }
 }

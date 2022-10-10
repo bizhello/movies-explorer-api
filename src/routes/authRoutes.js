@@ -1,29 +1,14 @@
 const express = require('express');
-const { celebrate, Joi } = require('celebrate');
 
 const authRoutes = express.Router();
 const {
   createUser, login, signout,
 } = require('../controller/authControllers');
-const { regexUrl } = require('../../utils/regexs');
+const { createUserValidation } = require('../../utils/validation');
+const { loginValidation } = require('../../utils/validation');
 
-authRoutes.post('/signup', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
-    avatar: Joi.string().regex(regexUrl),
-  }),
-}), createUser);
-
-authRoutes.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-  }),
-}), login);
-
+authRoutes.post('/signup', createUserValidation, createUser);
+authRoutes.post('/signin', loginValidation, login);
 authRoutes.get('/signout', signout);
 
 module.exports = {
